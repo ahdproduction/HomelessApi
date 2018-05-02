@@ -3,9 +3,12 @@ using HomelessApi.Models;
 using HomelessApi.Repositories;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomelessApi.Controllers
 {
+	[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     public class HomelessController : Controller
     {
@@ -17,6 +20,7 @@ namespace HomelessApi.Controllers
         }
 
         [HttpGet]
+		[Authorize(AuthenticationSchemes = "Bearer")]
         public IQueryable<CustomPin> Get()
         {
             return homelessRepository.Query();
